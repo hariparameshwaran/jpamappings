@@ -1,7 +1,11 @@
 package com.sta.jpamappings;
 
+import com.sta.jpamappings.onetoone.entities.employee.Employee;
+import com.sta.jpamappings.onetoone.entities.employee.EmployeeInfo;
 import com.sta.jpamappings.onetoone.entities.laptopstudent.Laptop;
 import com.sta.jpamappings.onetoone.entities.laptopstudent.Student;
+import com.sta.jpamappings.onetoone.repository.employeeemployeeinfo.EmployeeInfoRepository;
+import com.sta.jpamappings.onetoone.repository.employeeemployeeinfo.EmployeeRepository;
 import com.sta.jpamappings.onetoone.repository.laptopstudent.LaptopRepository;
 import com.sta.jpamappings.onetoone.repository.laptopstudent.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,12 @@ public class JpamappingsApplication implements CommandLineRunner {
 	@Autowired
 	LaptopRepository laptopRepository;
 
+	@Autowired
+	EmployeeRepository employeeRepository;
+
+	@Autowired
+	EmployeeInfoRepository employeeInfoRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(JpamappingsApplication.class, args);
 	}
@@ -25,7 +35,7 @@ public class JpamappingsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Student student = new Student();
+		/*Student student = new Student();
 		student.setId(1);
 		student.setName("Hari");
 		student.setGender("Male");
@@ -37,7 +47,31 @@ public class JpamappingsApplication implements CommandLineRunner {
 		laptop.setStudent(student);
 
 		studentRepository.save(student);
-		laptopRepository.save(laptop);
+		laptopRepository.save(laptop);*/
+
+		Employee employee = new Employee();
+		employee.setEmployeeId(1001);
+		employee.setFirstName("Harri");
+		employee.setLastName("Param");
+		employee.setEmail("abc@gmail.com");
+		employee.setGender("Male");
+
+
+		EmployeeInfo employeeInfo = new EmployeeInfo();
+		employeeInfo.setEmployeeInfoId(10000001);
+		employeeInfo.setStreet("RPR");
+		employeeInfo.setCity("Bangalore");
+		employeeInfo.setPostalCode("560062");
+		employeeInfo.setState("Karnataka");
+		employee.setEmployeeInfo(employeeInfo);
+		employeeInfo.setEmployee(employee);
+		employeeRepository.save(employee);
+		employeeInfoRepository.save(employeeInfo);
+
+
+
+
+
 
 
 	}
